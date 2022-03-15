@@ -1,0 +1,62 @@
+
+- name: Configure ELK VM with Docker
+    hosts: elk
+    remote_user: ansible
+    become: True
+    tasks:
+
+    # Use apt module
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        name: docker.io
+        state: present
+
+    # Use apt module
+    - name: Install python-pip
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    # Use pip module
+    - name: Install Docker Python module
+      pip:
+        name: docker
+        state: present
+
+    # Use command module
+    - name: Increase the Virtual Memory on the ELK VM
+      command: sysctl -w vm.max_map_count=262144
+    
+    # Use shell module
+    - name: Increase the Virtual Memory on the restart
+      shell: echo "vm.max_map_count=262144" >> /etc/sysctl.conf
+
+    # Use sysctl module
+    - name: Use more memory
+      ansible.posix.sysctl:
+        name: vm.max_map_count
+        value: "262144"
+        state: present
+        reload: yes
+
+    # Use docker_container module
+    - name: Download and Launch a Docker ELK Container
+      docker_container:
+        name: elk
+        image: sebp/elk
+        state: started
+        restart_policy: always
+        # Please list the ports that ELK runs on
+        published_ports:
+          -  5601:5601
+          -  9200:9200
+          -  5044:5044
+
+    # Use systemd module
+    - name: Enable service Docker on Boot
+      systemd:
+        name: docker
+        enabled: yes
