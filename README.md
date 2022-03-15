@@ -148,17 +148,35 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+ELK Server 
+![docker_ps_output_ELKserver](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/fc336f84368252925248d96ad4555fe85d234d53/docker_ps_output_ELKserver.png)
+
+Jump-Box-Provisioner
+![docker_ps_output_Jump-Box-Provisioner](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/fc336f84368252925248d96ad4555fe85d234d53/docker_ps_output_Jump-Box-Provisioner.png) 
+
+Web-1 VM
+![docker_ps_output_Web-1](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/fc336f84368252925248d96ad4555fe85d234d53/docker_ps_output_Web-1.png)
+
+Web-2 VM
+![docker_ps_output_Web-2](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/fc336f84368252925248d96ad4555fe85d234d53/docker_ps_output_Web-2.png) 
+
+DVWA-VM3
+![docker_ps_output_DVWA-VM3](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/fc336f84368252925248d96ad4555fe85d234d53/docker_ps_output_DVWA-VM3.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- List the IP addresses of the machines you are monitoring 
+  - Web-1: 10.1.0.5
+  - Web-2: 10.1.0.6
+  - DVWA-VM3: 10.1.0.7
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- [Metricbeat Module Status Screenshot](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/22f9588642197fde3ef891bea2873e2d30c806f2/Metricbeat_data_successful.png)
+- [Filebeat Module Status Screenshot](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/22f9588642197fde3ef891bea2873e2d30c806f2/Filebeat_data_successful.png)
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Metericbeat will be used to monitor VM stats, per CPU core stats, per filesystem stats, memory stats and network stats.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
