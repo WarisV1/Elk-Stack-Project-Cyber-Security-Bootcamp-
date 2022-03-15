@@ -1,0 +1,41 @@
+  - name: Config Web VM with Docker
+    hosts: webservers
+    become: yes
+    tasks:
+    
+    # Use apt module
+    - name: Install docker.io
+      apt:
+        force_apt_get: yes
+        update_cache: yes
+        name: docker.io
+        state: present
+    
+    # Use apt module
+    - name: Install python-pip
+      apt:
+        force_apt_get: yes
+        name: python-pip
+        state: present
+    
+    # Use pip module (It will default to pip3)
+    - name: Install Docker python module
+      pip:
+        name: docker
+        state: present
+
+    # Creates the number of containers defined by the variable create_containers, using values from vars file
+    - name: download and launch a docker web container
+      docker_container:
+        name: dvwa
+        image: cyberxsecurity/dvwa
+        state: started
+        restart_policy: always
+        published_ports: 80:80
+
+    # Use docker_container module
+    - name: Enable docker service
+      systemd:
+        name: docker
+        enabled: yes
+
