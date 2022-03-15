@@ -5,7 +5,7 @@ Project for UPenn Cybersecurity Bootcamp, 03-10-2022.
 
 The files in this repository were used to configure the network depicted below.
 
-![TODO: Update the path with the name of your diagram](Images/topology.png)
+![TODO: Update the path with the name of your diagram](Images/project_one.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
