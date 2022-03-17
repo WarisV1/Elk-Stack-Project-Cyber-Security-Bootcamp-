@@ -20,7 +20,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
   - [Metricbeat Playbook](https://github.com/WarisV1/Elk-Stack-Project-Cyber-Security-Bootcamp-/blob/c4549dd7710c0aaf982b795acd4102031577fa68/Metricbeat%20Playbook)
   
 This document contains the following details:
-- Description of the Topologu
+- Description of the Topology
 - Access Policies
 - ELK Configuration
   - Beats in Use
