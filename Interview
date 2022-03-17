@@ -1,0 +1,41 @@
+Interview Question
+Waris Wasim
+
+How would you control access to a cloud network? 
+
+Having complete control over your cloud network is crucial and an important part in a successful organization. 
+It is important that your development team has the resources to access the cloud network. During my Cyber Security Bootcamp I came across a similar problem, 
+In that Project I deployed a virtual network with multiple VMs to Azure. I had to make sure only a select amount of people had authorized access. 
+Just like most organizations only limiting access to engineers. After establishing the virtual network I had to configure a network security group for the entire subnet. 
+Achieving this blocked traffic from all IP addresses, except for my engineers. This NSG allows inbound access to one machine called the jump box. 
+After creating the jump box, I allowed connections from the jump box to the other VMs IP addresses. Lastly, 
+I used SSH keys to eliminate any vulnerabilities with brute force. This method is useful for my Project because selected users have access to the virtual network. 
+The only issue that I've noticed is that it requires updating the NSG rule every time you want to add or subtract a user from having access. 
+Another solution could be implementing a VPN Gateway to a private network. This allows easier maintenance. 
+
+Now to go in depth on access controls around the entire subnet, I created a NSG with the following ruleset.                                                                                                                   -Source: Use the IP Addresses setting, with your IP address in the field.
+-Source port ranges: Set to Any or * here.
+-Destination: This can be set VirtualNetwork but a better setting is to specify the internal IP of your jump box to really limit this traffic.
+-Service: Set to SSH
+-Destination port ranges: This will default to port 22 as we selected SSH for the service
+-Protocol: This will default to TCP.
+-Action: Set to Allow traffic.
+-Priority: This must be a lower number than your rule to deny all traffic
+
+These rules allow access to the jump box from specific IP addresses. I also configured access controls around the subnet as well. 
+The following ruleset below helps allow the VMs in the network to communicate with the jumpbox. 
+
+-Source: Use the IP Addresses setting with your jump box's internal IP address in the field.
+-Source port ranges: Any or * can be listed here.
+-Destination: Set to VirtualNetwork.
+-Service: Set to SSH
+-Destination port ranges: WIll default to port 22.
+-Protocol: Will default to TCP.
+-Action: Set to Allow traffic from your jump box.
+-Priority: Priority must be a lower number than your rule to deny all traffic.
+
+This method does support the use of scaling, either horizontal or vertical. There are better solutions than a jump box. 
+A more dynamic method would be using Zero Trust Security. This model establishes a secure channel directly between there directory and server. 
+This approach requires each user to authenticate to each IT resource. It doesn’t require a jump server or a VPN. 
+The issues with VPNs is that it can be costly for some businesses and from a server perspective they do not allocate resources properly. 
+There are advantages to VPNs such as scaling and shared/dedicated hosting, but at the end of the day it all depends on your organization's network structure. 
